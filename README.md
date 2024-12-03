@@ -43,7 +43,7 @@ Briefy는 매일 최신 뉴스를 크롤링하고 요약하여 PDF로 정리한 
    pip install -r requirements.txt
    ```
 
-   **python 3.13.0, rust 1.83.0가 설치되어 있어야 하며 환경변수 설정이 올바르게 되어있어야 합니다.**
+   **python 3.11.6, rust 1.83.0가 설치되어 있어야 하며 환경변수 설정이 올바르게 되어있어야 합니다.**
 
 3. **환경 변수 설정**
 
@@ -51,7 +51,7 @@ Briefy는 매일 최신 뉴스를 크롤링하고 요약하여 PDF로 정리한 
 
    ```bash
    EMAIL_USERNAME=your_email@gmail.com(이곳에 요악본 pdf를 받을 email을 작성하세요.)
-   EMAIL_PASSWORD=your_password(이곳에 email 비밀번호를 작성하세요.)
+   EMAIL_PASSWORD=your_password(이곳에 email 앱 비밀번호를 생성하여 작성하세요.)
    ```
 
    - 이메일 서비스(Gmail 등)의 앱 비밀번호를 사용해야 합니다.
