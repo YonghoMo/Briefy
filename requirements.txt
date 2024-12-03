@@ -4,3 +4,4 @@ transformers
 fpdf
 yagmail
 schedule
+python-dotenv
