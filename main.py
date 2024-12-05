@@ -74,7 +74,7 @@ def job():
             return
 
         # PDF 생성
-        pdf_filename = f"news_summary_{datetime.now().strftime('%Y%m%d')}.pdf"
+        pdf_filename = f"{datetime.now().strftime('%Y%m%d')}.pdf"
         create_news_pdf(summarized_articles, pdf_filename)
 
         # 이메일 전송
