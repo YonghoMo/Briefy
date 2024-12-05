@@ -25,7 +25,11 @@ def send_email(
         
         contents = [body]
         if attachment and os.path.exists(attachment):
-            contents.append(attachment)
+            full_path = os.path.abspath(attachment)
+            contents.append(full_path)
+            logging.info(f"첨부파일 추가: {full_path}")
+        else:
+            logging.warning(f"첨부파일을 찾을 수 없음: {attachment}")
 
         yag.send(
             to=recipient,

@@ -56,40 +56,42 @@ def job():
     try:
         logging.info("일일 뉴스 요약 작업 시작")
         
-        # 뉴스 수집
-        articles = fetch_news(
-            limit=10,
-            keyword_filter=["우크라이나", "중국", "미국", "일본", "러시아"]
-        )
-        
-        if not articles:
-            logging.error("뉴스를 가져오는데 실패했습니다")
-            return
-
-        # 기사 처리 및 요약
-        summarized_articles = process_articles(articles)
-        
-        if not summarized_articles:
-            logging.error("처리된 기사가 없습니다")
-            return
-
-        # PDF 생성
-        pdf_filename = f"{datetime.now().strftime('%Y%m%d')}.pdf"
-        create_news_pdf(summarized_articles, pdf_filename)
-
-        # 이메일 전송
+        # 수신자 이메일 가져오기
         recipient = os.getenv("EMAIL_USERNAME")
         if not recipient:
             logging.error("이메일 수신자가 설정되지 않았습니다")
             return
-
-        send_email(
-            recipient=recipient,
-            subject=f"일일 세계 뉴스 요약 ({datetime.now().strftime('%Y-%m-%d')})",
-            body="안녕하세요,\n\n오늘의 세계 뉴스 요약을 첨부파일로 보내드립니다.\n\n감사합니다.",
-            attachment=pdf_filename
-        )
+            
+        # 오늘 날짜
+        today = datetime.now().strftime("%Y%m%d")
         
+        # 뉴스 수집 및 처리
+        articles = fetch_news(limit=10)
+        if not articles:
+            logging.error("뉴스를 가져올 수 없습니다")
+            return
+            
+        summarized = process_articles(articles)
+        if not summarized:
+            logging.error("뉴스 요약을 생성할 수 없습니다")
+            return
+            
+        # PDF 파일명 통일
+        pdf_filename = f"news_summary_{today}.pdf"
+        
+        # PDF 생성
+        if not create_news_pdf(summarized, today):
+            logging.error("PDF를 생성할 수 없습니다")
+            return
+            
+        # 이메일 전송
+        subject = f"{today} 세계 뉴스 요약"
+        body = "안녕하세요,\n\n오늘의 세계 뉴스 요약을 보내드립니다.\n자세한 내용은 첨부된 PDF를 확인해 주세요."
+        
+        if not send_email(recipient, subject, body, pdf_filename):
+            logging.error("이메일 전송에 실패했습니다")
+            return
+            
         logging.info("일일 뉴스 요약 작업 완료")
         
     except Exception as e:
