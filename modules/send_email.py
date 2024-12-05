@@ -13,7 +13,24 @@ def send_email(
     body: str,
     attachment: Optional[str] = None
 ) -> bool:
-    """이메일 전송"""
+    """
+    이메일을 전송하는 함수
+    
+    Args:
+        recipient (str): 수신자 이메일 주소
+        subject (str): 이메일 제목
+        body (str): 이메일 본문
+        attachment (Optional[str]): 첨부 파일 경로 (선택사항)
+        
+    Returns:
+        bool: 이메일 전송 성공 시 True, 실패 시 False
+        
+    Note:
+        - Gmail SMTP를 사용하여 이메일 전송
+        - 환경 변수에서 발신자 이메일과 비밀번호를 가져옴
+        - 첨부 파일이 있는 경우 절대 경로로 변환하여 첨부
+        - 오류 발생 시 자세한 로그 기록
+    """
     try:
         sender = os.getenv("EMAIL_USERNAME")
         password = os.getenv("EMAIL_PASSWORD")

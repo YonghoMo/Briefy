@@ -6,7 +6,22 @@ import logging
 from datetime import datetime
 
 def fetch_news(limit: int = 10, keyword_filter: Optional[List[str]] = None) -> List[Dict]:
-    """뉴이버 뉴스 수집"""
+    """
+    네이버 뉴스의 세계 섹션에서 최신 뉴스를 수집하는 함수
+    
+    Args:
+        limit (int): 수집할 최대 기사 수 (기본값: 10)
+        keyword_filter (Optional[List[str]]): 필터링할 키워드 리스트 (미구현)
+        
+    Returns:
+        List[Dict]: 수집된 기사 정보를 담은 딕셔너리 리스트
+        각 딕셔너리는 다음 키를 포함:
+        - title: 기사 제목
+        - link: 기사 URL
+        - press: 언론사명
+        - category: 뉴스 카테고리
+        - timestamp: 수집 시간
+    """
     try:
         logging.info("뉴스 수집 시작")
         headers = {

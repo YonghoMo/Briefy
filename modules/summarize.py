@@ -3,7 +3,23 @@ import logging
 import re
 
 def summarize_article(text: str, summary_length: int = 3) -> Optional[str]:
-    """뉴스 기사 요약 - 첫 3~5문장 추출 방식"""
+    """
+    뉴스 기사 텍스트를 요약하는 함수
+    
+    Args:
+        text (str): 요약할 뉴스 기사 본문 텍스트
+        summary_length (int): 기본 요약 문장 수 (기본값: 3)
+        
+    Returns:
+        Optional[str]: 성공 시 요약된 텍스트, 실패 시 None
+        
+    Note:
+        - 추출적 요약 방식 사용 (첫 3~5문장 추출)
+        - 텍스트 길이에 따라 동적으로 요약 길이 조정
+        - 불필요한 문장 필터링 (메타 정보, 광고 등)
+        - 최소/최대 길이 제한 적용
+        - 문장 정제 및 포맷팅 수행
+    """
     try:
         if not text or len(text) < 100:
             logging.warning("텍스트가 너무 짧아 요약할 수 없습니다")

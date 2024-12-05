@@ -5,7 +5,21 @@ from typing import Optional
 import re
 
 def fetch_article(url: str) -> Optional[str]:
-    """네이버 뉴스 기사 본문 가져오기"""
+    """
+    네이버 뉴스 기사의 본문 내용을 추출하는 함수
+    
+    Args:
+        url (str): 네이버 뉴스 기사의 URL
+        
+    Returns:
+        Optional[str]: 성공 시 기사 본문 텍스트, 실패 시 None
+        
+    Note:
+        - 다양한 네이버 뉴스 페이지 레이아웃에 대응
+        - 불필요한 요소(기자 정보, 저작권 등)를 제거
+        - 텍스트 정리(공백 정리, 앞뒤 공백 제거)
+        - 너무 짧은 본문은 오류로 처리
+    """
     try:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
