@@ -49,6 +49,7 @@ temp/
 tmp/
 *.bak
 *.tmp
+*.txt
 
 # 캐시 파일
 .cache/
