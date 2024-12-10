@@ -2,7 +2,10 @@ name: Daily News Summary
 
 on:
   schedule:
-    - cron: "0 23 * * *" # UTC 23:00 (KST 08:00)
+    # 매일 오전 8시
+    - cron: '0 8 * * *'
+    # 매일 오후 8시
+    - cron: '0 20 * * *'
   workflow_dispatch: # 수동 실행 옵션
 
 jobs:
