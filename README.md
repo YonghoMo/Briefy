@@ -80,13 +80,13 @@ python main.py
 
 ---
 
-## 🚀 GitHub Actions를 통한 자동화
+## 🚀 GitHub Actions를 통한 자동화 (추천)
 
 GitHub Actions를 사용하면 서버를 유지하거나 매일 로컬에서 실행할 필요 없이, 클라우드 환경에서 이 프로젝트를 자동으로 실행할 수 있습니다.
 
 ### 설정 방법
 
-1. **GitHub Actions 워크플로 파일 생성**:
+1. **GitHub Actions 워크플로 파일 생성(이미 생성되어 있다면 건너뛰기)**:
    - 프로젝트 디렉토리에서 `.github/workflows/briefy.yml` 파일 생성.
    - 아래 내용을 추가:
      ```yaml
@@ -94,8 +94,10 @@ GitHub Actions를 사용하면 서버를 유지하거나 매일 로컬에서 실
 
      on:
        schedule:
-         # 매일 오전 8시에 실행
-         - cron: '0 8 * * *'
+         # 매일 오전 8시
+          - cron: '0 8 * * *'
+         # 매일 오후 8시
+          - cron: '0 20 * * *'
        workflow_dispatch:  # 수동 실행 가능
      
      jobs:
